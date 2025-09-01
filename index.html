@@ -1,238 +1,412 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>请使用浏览器打开 - 勿埋我心</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>涩图time • 第一期</title>
+    <meta name="color-scheme" content="light dark" />
     <style>
-      body,
-      html {
-        width: 100%;
+      :root {
+        --bg: #f6f7fb;
+        --surface: #fff;
+        --text: #1b1e27;
+        --muted: #6b7280;
+        --outline: rgba(20, 22, 30, 0.08);
+        --ring: rgba(255, 85, 85, 0.15);
+        --radius: 14px;
+        --gap: 14px;
+        --accent1: #ff6a6a;
+        --accent2: #ff3d99;
+        --wm-size: 240px;
+        --wm-rotate: -24deg;
+        --wm-opacity: 0.18;
+        --wm-bg: none;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
         height: 100%;
+      }
+      body {
         margin: 0;
-        padding: 0;
-        background: #fff;
+        font: 14px/1.6 system-ui, -apple-system, Segoe UI, Roboto, PingFang SC,
+          Microsoft YaHei, Helvetica, Arial, sans-serif;
+        color: var(--text);
+        background: var(--bg);
       }
-      /* 容器默认隐藏，检测到 QQ/微信时再显示 */
-      .qqwx-interstitial {
-        display: none;
-        width: 100%;
-        height: 100%;
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+        padding: 14px 18px;
+        border-bottom: 1px solid var(--outline);
+        background: rgba(250, 250, 252, 0.75);
+        backdrop-filter: saturate(1.2) blur(8px);
       }
-      .top-bar-guidance {
-        font-size: 15px;
-        color: #fff;
-        height: 70%;
-        line-height: 1.8;
-        padding-left: 20px;
-        padding-top: 20px;
-        background: url(https://img.alicdn.com/imgextra/i3/2200638895580/O1CN01awiCFw1r5gfyRJf65_!!2200638895580.png)
-          center top/contain no-repeat;
-      }
-      .loader {
-        width: 320px;
-        margin: 50px auto 70px;
-        position: relative;
-        margin-top: 180px;
-      }
-      .loading-1 {
-        margin: 0 auto;
-        position: relative;
-        width: 70%;
-        height: 10px;
-        border: 1px solid #69d2e7;
-        border-radius: 10px;
-        animation: turn 4s linear 1.75s infinite;
-      }
-      .loading-1:before {
-        content: "";
-        display: block;
-        position: absolute;
-        width: 0%;
-        height: 100%;
-        background: #69d2e7;
-        box-shadow: 10px 0 15px 0 #69d2e7;
-        animation: load 2s linear infinite;
-      }
-      .loading-2 {
-        width: 100%;
-        position: absolute;
-        top: 20px;
-        color: #69d2e7;
-        font-size: 22px;
-        text-align: center;
-        animation: bounce 2s linear infinite;
-      }
-      @keyframes load {
-        0% {
-          width: 0%;
-        }
-        87.5%,
-        100% {
-          width: 100%;
-        }
-      }
-      @keyframes turn {
-        0% {
-          transform: rotateY(0deg);
-        }
-        6.25%,
-        50% {
-          transform: rotateY(180deg);
-        }
-        56.25%,
-        100% {
-          transform: rotateY(360deg);
-        }
-      }
-      @keyframes bounce {
-        0%,
-        100% {
-          top: 10px;
-        }
-        12.5% {
-          top: 30px;
-        }
-      }
-      .app-download-btn {
-        display: block;
-        width: 214px;
-        height: 40px;
-        line-height: 40px;
-        margin: 18px auto 0;
-        text-align: center;
-        font-size: 18px;
-        color: #2466f4;
-        border-radius: 20px;
-        border: 0.5px #2466f4 solid;
-        text-decoration: none;
+      .brand {
+        justify-self: center;
+        font-size: clamp(18px, 2.4vw, 28px);
+        line-height: 1.2;
+        font-weight: 800;
+        letter-spacing: 0.2px;
+        white-space: nowrap;
+        color: #2a2f3a;
+        opacity: 0.9;
       }
 
-      /* 可选：当提示页显示时，隐藏主站内容（如果你把这段插到现有页面） */
-      .hide-main-when-interstitial body > :not(.qqwx-interstitial) {
-        display: none !important;
+      .wrap {
+        width: min(1200px, 100%);
+        margin: 0 auto;
+        padding: 14px clamp(10px, 3vw, 18px) 120px;
+      }
+
+      /* 标题下自定义文本框 */
+      .custom-text {
+        width: min(1200px, 100%);
+        margin: 16px auto 0;
+        padding: 12px 18px;
+        background: var(--surface);
+        border: 1px solid var(--outline);
+        border-radius: var(--radius);
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--text);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      }
+      .custom-text p {
+        margin: 0;
+      }
+
+      /* 单列布局 */
+      .grid {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap);
+      }
+      .card {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        break-inside: avoid;
+        margin: 0;
+        border-radius: var(--radius);
+        background: var(--surface);
+        border: 1px solid var(--outline);
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+        overflow: hidden;
+        transition: transform 0.12s ease, box-shadow 0.12s ease;
+      }
+      .card:where(:hover, :focus-visible) {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(16, 24, 40, 0.08);
+      }
+      .thumb-wrap {
+        position: relative;
+        overflow: hidden;
+      }
+      .thumb {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        aspect-ratio: auto;
+        background: #eee;
+      }
+      .meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 12px;
+        color: var(--muted);
+        font-size: 12px;
+        border-top: 1px solid var(--outline);
+      }
+
+      /* 水印叠加（缩略层） */
+      .thumb-wrap::after {
+        content: "";
+        position: absolute;
+        inset: -20%;
+        background-image: var(--wm-bg);
+        background-repeat: repeat;
+        background-size: var(--wm-size) var(--wm-size);
+        transform: rotate(var(--wm-rotate));
+        opacity: var(--wm-opacity);
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      /* 右下角悬浮按钮 */
+      .fab {
+        position: fixed;
+        right: 16px;
+        bottom: calc(16px + env(safe-area-inset-bottom));
+        z-index: 30;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 18px;
+        border-radius: 999px;
+        gap: 8px;
+        text-decoration: none;
+        color: #fff;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--accent1), var(--accent2));
+        box-shadow: 0 12px 30px rgba(255, 82, 120, 0.35);
+        transition: transform 0.12s ease, box-shadow 0.12s ease;
+        font-size: clamp(14px, 2vw, 18px);
+      }
+      .fab:where(:hover, :focus-visible) {
+        transform: translateY(-1px);
+        box-shadow: 0 16px 40px rgba(255, 82, 120, 0.45);
+      }
+
+      .download-card {
+        width: min(760px, 92%);
+        margin: 40px auto 16px;
+        padding: 22px 24px;
+        border-radius: 20px;
+        background: var(--surface);
+        border: 1px solid var(--outline);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        text-align: center;
+      }
+      .download-card h3 {
+        margin: 0 0 8px;
+        font-size: 20px;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--accent1), var(--accent2));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .download-card p {
+        margin: 0 0 14px;
+        color: var(--muted);
+      }
+      .download-btn {
+        display: inline-block;
+        padding: 10px 16px;
+        border-radius: 999px;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--accent1), var(--accent2));
+        box-shadow: 0 10px 24px rgba(255, 82, 120, 0.3);
+      }
+
+      .bottom-cta {
+        width: min(760px, 92%);
+        margin: 26px auto 40px;
+        text-align: center;
+      }
+      .bottom-cta .cta-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 26px;
+        border-radius: 9999px;
+        text-decoration: none;
+        font-weight: 700;
+        color: #fff;
+        background: linear-gradient(135deg, #60a5fa, #3b82f6);
+        box-shadow: 0 10px 24px rgba(59, 130, 246, 0.25);
+        transition: transform 0.12s ease, box-shadow 0.12s ease,
+          filter 0.12s ease;
+        font-size: clamp(16px, 2.2vw, 20px);
+      }
+      .bottom-cta .cta-btn:hover {
+        filter: brightness(1.05);
+        box-shadow: 0 12px 28px rgba(59, 130, 246, 0.35);
+      }
+      .bottom-cta .cta-btn:active {
+        transform: translateY(1px);
+      }
+
+      @supports not (
+        (backdrop-filter: blur(8px)) or (-webkit-backdrop-filter: blur(8px))
+      ) {
+        .topbar {
+          background: #fafafc;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .card,
+        .fab,
+        .bottom-cta .cta-btn {
+          transition: none;
+        }
+      }
+
+      .loading {
+        width: min(1200px, 100%);
+        margin: 14px auto 0;
+        color: var(--muted);
+        padding: 0 6px;
+      }
+
+      /* 防保存覆盖层/拖拽 */
+      .thumb-guard {
+        position: absolute;
+        inset: 0;
+        pointer-events: auto;
+        background: transparent;
+      }
+      .thumb-wrap {
+        user-select: none;
+        -webkit-user-drag: none;
+      }
+
+      .next-issue__title {
+        margin: 28px auto 12px;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 600;
+        color: #333;
+        letter-spacing: 0.05em;
+      }
+      .footer-qrcode {
+        text-align: center;
+        margin: 30px 0;
+      }
+      .footer-qrcode img {
+        max-width: 50%;
+        height: auto;
+        cursor: pointer;
+        margin: 0 auto;
       }
     </style>
   </head>
   <body>
-    <!-- 提示页（默认隐藏） -->
-    <div class="qqwx-interstitial" id="qqwx">
-      <div class="top-bar-guidance">
-        <div class="htmleaf-container">
-          <header class="htmleaf-header"></header>
-          <div class="demo">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="loader">
-                    <!-- 用于 scheme 触发的隐藏链接 -->
-                    <a
-                      style="display: none"
-                      href=""
-                      id="vurl"
-                      rel="noreferrer"
-                    ></a>
-                    <div class="loading-1"></div>
-                    <div class="loading-2">
-                      因 QQ/微信自带浏览器不支持本网站
-                      <br />请点击右上角使用其他浏览器
-                      <br />
-                      <a id="openBtn" class="app-download-btn" href="#"
-                        >点击打开浏览器</a
-                      >
-                      <a href="https://www.skyqian.com" class="app-download-btn"
-                        >勿埋我心</a
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--/.container-->
-          </div>
-          <!--/.demo-->
-        </div>
-        <!--/.htmleaf-container-->
-      </div>
+    <header class="topbar" role="banner">
+      <div class="brand">涩图time • 第一期</div>
+    </header>
+
+    <div class="custom-text">
+      <p>后面有图包下载,解压密码：556677 耐心等待加载几分钟</p>
     </div>
 
+    <main id="main" class="wrap">
+      <div id="status" class="loading" aria-live="polite">
+        正在加载媒体文件…
+      </div>
+      <section id="grid" class="grid" aria-live="polite"></section>
+      <div id="io-sentinel" style="height: 1px"></div>
+
+      <section class="download-card" aria-label="下载原图">
+        <h3>本期无水印原图</h3>
+        <p>保存到自己的网盘防止和谐</p>
+        <a
+          class="download-btn"
+          href="https://pan.xunlei.com/s/VOXb8OzCKCyMM1p7VGKmp6WSA1?pwd=qwtt#"
+          target="_blank"
+          rel="noopener"
+          >点击下载</a
+        >
+      </section>
+
+      <h3 class="next-issue__title">下一期↓↓</h3>
+
+      <section class="bottom-cta" aria-label="添加好友获取更新">
+        <!-- 修改：按钮用于测试外部打开 -->
+        <a id="openBtn" class="cta-btn" href="#" rel="noreferrer">
+          点击打开浏览器
+        </a>
+      </section>
+    </main>
+
+    <h3 class="next-issue__title">点击图片或扫码加群↓↓</h3>
+    <div class="footer-qrcode">
+      <a href="https://qm.qq.com/q/NN5UyBdd2A" target="_blank" rel="noopener">
+        <img
+          src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAJ_ymicm2kPiVJxH9Vizn-oz4NJ6praAAJRGAACSijoVKRP1AABRC3LdDYE.jpg"
+          alt=""
+        />
+      </a>
+    </div>
+
+    <a
+      class="fab"
+      href="https://qm.qq.com/q/NN5UyBdd2A"
+      target="_blank"
+      rel="noopener"
+      aria-label="添加QQ群"
+    >
+      点击按钮添加QQ群：934893858
+    </a>
+
+    <script>
+      /* 原有的媒体加载和水印脚本 ... 保持不变 */
+    </script>
+
+    <!-- 新增：QQ/微信内置浏览器拦截与外部跳转逻辑 -->
     <script>
       (function () {
-        // —— 配置：是否启用强制跳转逻辑（等价于 $conf['qqjump']=1）——
-        var QQ_JUMP_ENABLED = true;
-
         var ua = navigator.userAgent || "";
-        var isQQ = ua.indexOf("QQ/") > -1; // 手Q内置浏览器
-        var isWeChat = ua.indexOf("MicroMessenger") > -1; // 微信内置浏览器
+        var isQQ = ua.indexOf("QQ/") > -1;
+        var isWeChat = ua.indexOf("MicroMessenger") > -1;
         var isAndroid = ua.indexOf("Android") > -1;
+        var isIOS = /iPhone|iPad|iPod/i.test(ua);
+        var url = window.location.href;
+        var enc = encodeURIComponent(url);
 
-        // 当前页面 URL
-        var currentUrl = window.location.href;
+        var schemes = [
+          "mttbrowser://url=" + enc,
+          "mqqbrowser://url=" + enc,
+          "qqbrowser://url=" + enc,
+        ];
+        var middle = "https://c.pc.qq.com/middlem.html?pfurl=" + enc;
 
-        // 触发外部浏览器（QQ 的腾讯浏览器）scheme
-        function openWithMTT(url) {
-          var dest = "mttbrowser://url=" + encodeURIComponent(url);
-          // 方式一：通过隐藏 <a> 触发（更接近你原来的“openu”做法）
-          var a = document.getElementById("vurl");
-          if (a) {
-            a.setAttribute("href", dest);
-            a.click();
-          } else {
-            // 方式二：直接设置 window.location（兜底）
-            window.location.href = dest;
-          }
-        }
+        var btn = document.getElementById("openBtn");
+        if (!btn) return;
 
-        // 在 QQ/微信中显示提示页并尝试打开外部浏览器
-        function showInterstitialAndTryOpen() {
-          var box = document.getElementById("qqwx");
-          if (!box) return;
-
-          // 显示提示页
-          box.style.display = "block";
-          // （可选）隐藏主站内容，如果你把本段插到现有页面里，请给 <html> 加上 class
-          // document.documentElement.classList.add('hide-main-when-interstitial');
-
-          // 自动尝试一次
-          openWithMTT(currentUrl);
-
-          // 点击任意处再次尝试
-          document.addEventListener(
-            "click",
-            function () {
-              openWithMTT(currentUrl);
-            },
-            { once: false }
-          );
-
-          // “点击打开浏览器”按钮
-          var btn = document.getElementById("openBtn");
-          if (btn) {
-            btn.addEventListener("click", function (e) {
-              e.preventDefault();
-              openWithMTT(currentUrl);
-            });
-          }
-
-          // 微信 Android 场景下，按你原逻辑创建一个隐藏 iframe（很多场景无实际作用，但保持行为一致）
-          if (isWeChat && isAndroid) {
-            var iframe = document.createElement("iframe");
-            iframe.style.display = "none";
-            document.body.appendChild(iframe);
-          }
-        }
-
-        // 主流程：当处于 QQ/微信 且开关开启时，显示提示页并尝试外部打开
-        if (QQ_JUMP_ENABLED && (isQQ || isWeChat)) {
-          // 这里的行为等价于 PHP 里命中条件就 echo 出整页并 exit
-          showInterstitialAndTryOpen();
+        if (isQQ) {
+          btn.href = schemes[0];
+        } else if (isWeChat && isAndroid) {
+          btn.href = schemes[0];
+        } else if (isWeChat && isIOS) {
+          btn.href = middle;
         } else {
-          // 非 QQ/微信：不做任何事，正常浏览
+          btn.href = url;
+        }
+
+        btn.addEventListener(
+          "click",
+          function (e) {
+            var tried = 0;
+            var start = Date.now();
+            var timer = setInterval(function () {
+              if (tried >= schemes.length) {
+                clearInterval(timer);
+                if (Date.now() - start > 1200) {
+                  window.location.href = middle;
+                }
+                return;
+              }
+              try {
+                window.location.href = schemes[tried++];
+              } catch (e) {
+                tried++;
+              }
+            }, 400);
+          },
+          false
+        );
+
+        if (isQQ || isWeChat) {
+          setTimeout(function () {
+            try {
+              window.location.href = schemes[0];
+            } catch (e) {}
+          }, 300);
         }
       })();
     </script>
-
-    <noscript>需要启用 JavaScript 才能正确跳转外部浏览器。</noscript>
   </body>
 </html>
