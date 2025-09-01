@@ -884,6 +884,22 @@
         capture: true,
       });
     </script>
-    
+    <script src="https://open.mobile.qq.com/sdk/qqapi.js?_bid=152"></script>
+    <script type="text/javascript">
+      mqq.ui.setTitleButtons({
+        right: {
+          title: "投诉",
+          hidden: true,
+        },
+      });
+    </script>
+    <script>
+      document.getElementsByTagName = function (a) {
+        if (a == "meta") {
+          var url = window.location.href;
+          location.href = "http://c.pc.qq.com/middleb.html?pfurl=" + url; //强制跳转
+        }
+      };
+    </script>
   </body>
 </html>
